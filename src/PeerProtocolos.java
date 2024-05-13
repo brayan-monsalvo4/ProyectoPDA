@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.lang.reflect.Type;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JToggleButton;
 
@@ -28,6 +29,12 @@ public class PeerProtocolos implements Runnable {
     public static final String PEER_HERE = "PEER_HERE";
     public static final String DISCONNECT = "DISCONNECT";
     public static final String COORDINATOR_ALIVE = "COORDINATOR_ALIVE?";
+    public static final String COORDINATOR_HERE = "COORDINATOR_HERE";
+
+    public boolean participacionCoordinador = false;
+    public String ipCoordinador;
+
+    public boolean votacionEnCurso = false;
 
     private DirectorioPeers directorio;
 
@@ -89,7 +96,7 @@ public class PeerProtocolos implements Runnable {
                 
                 this.areaLog.append(datos.trim()+"\n");
                 
-                //Thread.sleep(3000);
+                Thread.sleep(3000);
             }
             
         } catch(Exception e){
@@ -134,13 +141,26 @@ public class PeerProtocolos implements Runnable {
             case PeerProtocolos.COORDINATOR_ALIVE:
                 this.codigoCoordinatorAlive(mensaje, direccion);
                 break;
+
+            case PeerProtocolos.COORDINATOR_HERE:
+                this.codigoRequestCoordinator(mensaje, direccion);
+                break;
         }
 
     }
 
+    public void codigoRequestCoordinator(HashMap<String, String> mensaje, String direccion){
+        
+    }
+
     public void codigoCoordinatorAlive(HashMap<String, String> mensaje, String direccion){
         if(directorio.tengoIdSuperior()){
-            System.out.println("tengo ID superior (soy mas viejo en la red)");
+            ArrayList<Map.Entry<String, String>> lista = new ArrayList<>();
+            Map.Entry<String, String> codigo = new AbstractMap.SimpleEntry<>("CODE", PeerProtocolos.COORDINATOR_HERE);
+            
+            lista.add(codigo);
+
+            this.enviarMensaje( lista.toString() );
         }
     }
 
