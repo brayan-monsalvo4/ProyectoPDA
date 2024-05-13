@@ -31,11 +31,6 @@ public class PeerProtocolos implements Runnable {
     public static final String COORDINATOR_ALIVE = "COORDINATOR_ALIVE?";
     public static final String COORDINATOR_HERE = "COORDINATOR_HERE";
 
-    public boolean participacionCoordinador = false;
-    public String ipCoordinador;
-
-    public boolean votacionEnCurso = false;
-
     private DirectorioPeers directorio;
 
     public PeerProtocolos(String host, int port, String id, DirectorioPeers directorio){
