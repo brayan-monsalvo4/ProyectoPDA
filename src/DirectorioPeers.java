@@ -12,15 +12,14 @@ public class DirectorioPeers {
 
     private String direccionPropia;
     private String id;
-    private UUID uuid;
-
+    private long uuid;
 
     public DirectorioPeers(String direccion, String id){
         mapIdIp = new HashMap<>();
         mapIpId = new HashMap<>();
 
         this.id = id;
-        this.uuid = UUID.fromString( this.id );
+        this.uuid = Long.valueOf(id);
 
         this.direccionPropia = direccion;
 
@@ -67,18 +66,19 @@ public class DirectorioPeers {
 
     public boolean tengoIdSuperior(){
         ArrayList<String> listaIds = new ArrayList<String>(mapIdIp.keySet());
+        ArrayList<Long> lista = new ArrayList<>();
 
-        listaIds.remove( this.id );
-
-        for (String id : listaIds){
-            UUID uudiEnLista = UUID.fromString( id );
-
-            if ( uuid.compareTo( uudiEnLista ) <= 0){
-                return false;
-            }
+        for (String id: listaIds){
+            lista.add( Long.valueOf( id ) );
         }
 
-        return true;
+        Collections.sort(lista);
+
+        if (lista.get(0) == uuid){
+            return true;
+        }
+
+        return false;
     }
 
     public void eliminarPeer(String ip){

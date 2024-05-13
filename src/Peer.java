@@ -21,7 +21,7 @@ public class Peer {
         try{
             long marcaTiempo = getServerTime();
 
-            this.id = generateUUID(marcaTiempo).toString();
+            this.id = String.valueOf(marcaTiempo);
             
             String direccion = "/"+InetAddress.getLocalHost().toString().split("/")[1];
             
