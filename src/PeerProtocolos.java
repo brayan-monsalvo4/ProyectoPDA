@@ -142,25 +142,19 @@ public class PeerProtocolos implements Runnable {
                 this.codigoCoordinatorAlive(mensaje, direccion);
                 break;
 
-            case PeerProtocolos.COORDINATOR_HERE:
-                this.codigoRequestCoordinator(mensaje, direccion);
-                break;
         }
 
     }
 
-    public void codigoRequestCoordinator(HashMap<String, String> mensaje, String direccion){
-        
-    }
-
     public void codigoCoordinatorAlive(HashMap<String, String> mensaje, String direccion){
         if(directorio.tengoIdSuperior()){
+            System.out.println("entro en if tengo idsuperior");
             ArrayList<Map.Entry<String, String>> lista = new ArrayList<>();
             Map.Entry<String, String> codigo = new AbstractMap.SimpleEntry<>("CODE", PeerProtocolos.COORDINATOR_HERE);
             
             lista.add(codigo);
 
-            this.enviarMensaje( lista.toString() );
+            enviarMensaje( lista.toString() );
         }
     }
 
