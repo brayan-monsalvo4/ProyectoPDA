@@ -27,6 +27,7 @@ public class PeerProtocolos implements Runnable {
     public static final String SCAN_PEERS = "SCAN_PEERS";
     public static final String PEER_HERE = "PEER_HERE";
     public static final String DISCONNECT = "DISCONNECT";
+    public static final String COORDINATOR_ALIVE = "COORDINATOR_ALIVE?";
 
     private DirectorioPeers directorio;
 
@@ -104,9 +105,7 @@ public class PeerProtocolos implements Runnable {
         try {
             ArrayList<Map.Entry<String, String>> lista = new ArrayList<>();
             Map.Entry<String, String> codigo = new AbstractMap.SimpleEntry<>("CODE", PeerProtocolos.DISCONNECT);
-            
             lista.add(codigo);
-
             this.enviarMensaje( lista.toString() );
 
 			this.socket.leaveGroup(this.host);
@@ -132,8 +131,17 @@ public class PeerProtocolos implements Runnable {
                 this.codigoDisconnect(mensaje, direccion);
                 break;
 
+            case PeerProtocolos.COORDINATOR_ALIVE:
+                this.codigoCoordinatorAlive(mensaje, direccion);
+                break;
         }
 
+    }
+
+    public void codigoCoordinatorAlive(HashMap<String, String> mensaje, String direccion){
+        if(directorio.tengoIdSuperior()){
+            System.out.println("tengo ID superior (soy mas viejo en la red)");
+        }
     }
 
     public void codigoDisconnect(HashMap<String, String> mensaje, String direccion){

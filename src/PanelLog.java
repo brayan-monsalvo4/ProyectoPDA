@@ -67,6 +67,9 @@ public class PanelLog extends JPanel{
     }
 
     private void coordinadorVivo(PeerProtocolos peer){
-        System.out.println("coordinador vivo?");
+        ArrayList<Map.Entry<String, String>> lista = new ArrayList<>();
+        Map.Entry<String, String> mensaje = new AbstractMap.SimpleEntry<>("CODE", PeerProtocolos.COORDINATOR_ALIVE);
+        lista.add(mensaje);
+        peer.enviarMensaje( lista.toString() );
     }
 }
