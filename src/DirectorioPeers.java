@@ -45,14 +45,6 @@ public class DirectorioPeers {
 
     }
 
-    public void agregarNuevosPeers(HashMap<String, String> mapIdIp){
-        if(this.obtenerNumeroPeers() != 0){
-            return;
-        }
-
-        this.mapIdIp.putAll(mapIdIp);
-    }
-
     public String obtenerIpPeer(String id){
         return mapIdIp.get(id);
     }
@@ -61,18 +53,6 @@ public class DirectorioPeers {
         return mapIpId.get(ip);
     }  
     
-    public ArrayList<Map.Entry<String, String>> obtenerPeersIpId(){
-        ArrayList<Map.Entry<String, String>> listaPeers = new ArrayList<Map.Entry<String, String>>();
-
-        for (Map.Entry<String, String> entry : mapIpId.entrySet()){
-            listaPeers.add(entry);
-        }
-
-        System.out.println("lista peers:"+listaPeers);
-
-        return listaPeers;
-    }
-
     public boolean existePeer(String id){
         return ( mapIdIp.containsKey( id ) );
     }
@@ -102,7 +82,7 @@ public class DirectorioPeers {
     }
 
     public void eliminarPeer(String ip){
-        String id = mapIdIp.get(ip);
+        String id = mapIpId.get(ip);
 
         mapIpId.remove(ip);
         mapIdIp.remove(id);
