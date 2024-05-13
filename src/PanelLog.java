@@ -3,7 +3,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.AbstractMap;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.*;
 
@@ -12,6 +15,7 @@ public class PanelLog extends JPanel{
     private JScrollPane panelScroll;
     private JButton botonLimpiarLog;
     private JPanel panelBotones;
+    private JButton botonCoordinadorVivo;
 
     public PanelLog(PeerProtocolos peer){
         setLayout(new BorderLayout());
@@ -30,6 +34,7 @@ public class PanelLog extends JPanel{
         panelBotones = new JPanel(new BorderLayout());
 
         botonLimpiarLog = new JButton("LIMPIAR");
+        botonCoordinadorVivo = new JButton("COORDINADOR VIVO?");
 
         botonLimpiarLog.addActionListener(new ActionListener() {
 
@@ -39,7 +44,16 @@ public class PanelLog extends JPanel{
             }
         });
 
-        panelBotones.add(botonLimpiarLog, BorderLayout.CENTER);
+        botonCoordinadorVivo.addActionListener( new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                coordinadorVivo(peer);
+            }
+        } );
+
+        panelBotones.add(botonLimpiarLog, BorderLayout.WEST);
+        panelBotones.add(botonCoordinadorVivo, BorderLayout.EAST);
+
 
         add(panelScroll, BorderLayout.CENTER);
         add(panelBotones, BorderLayout.SOUTH);
@@ -50,5 +64,9 @@ public class PanelLog extends JPanel{
     private void limpiarLog(){
         this.areaLog.setText("");
         System.out.println("Limpiando");
+    }
+
+    private void coordinadorVivo(PeerProtocolos peer){
+        System.out.println("coordinador vivo?");
     }
 }
