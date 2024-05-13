@@ -74,6 +74,8 @@ public class DirectorioPeers {
 
         Collections.sort(lista);
 
+        System.out.println("mi id"+id);
+        System.out.println("otro id segun la lista : "+lista);
         if (lista.get(0) == uuid){
             return true;
         }
