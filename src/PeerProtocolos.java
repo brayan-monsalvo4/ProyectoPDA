@@ -89,7 +89,7 @@ public class PeerProtocolos implements Runnable {
                 
                 this.areaLog.append(datos.trim()+"\n");
                 
-                Thread.sleep(3000);
+                //Thread.sleep(3000);
             }
             
         } catch(Exception e){
